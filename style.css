@@ -157,7 +157,14 @@ body::before {
     transition: var(--transition);
 }
 
-/* FLOATING CONTACT */
+/* FLOATING CONTACT & ANIMATIONS */
+/* Pulse Animation for the button */
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(108, 92, 231, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(108, 92, 231, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(108, 92, 231, 0); }
+}
+
 .floating-contact {
     position: fixed;
     bottom: 30px;
@@ -179,6 +186,25 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Add pulse animation */
+    animation: pulse-glow 2s infinite;
+}
+
+/* Ensure the icon rotates smoothly */
+.floating-btn i {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Rotate the icon when active (360 Spin instead of 45deg) */
+.floating-contact.active .floating-btn i {
+    transform: rotate(360deg); /* Full spin for the chat icon */
+}
+
+/* Change button style when active */
+.floating-contact.active .floating-btn {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+    animation: none; /* Stop pulsing when open */
+    box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
 }
 
 .floating-btn:hover {
